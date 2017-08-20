@@ -1,6 +1,6 @@
 import { Table } from './model'
 import { parse } from './sql-parser'
-import * as fs from 'fs'
+import * as fs from 'fs';
 
 export namespace Knave {
     export function buildFile(filePath: string) : Promise<Table> {

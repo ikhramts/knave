@@ -1,1 +1,1 @@
-export { TestFile } from './testfile'
+export { Knave } from './knave'

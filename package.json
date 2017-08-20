@@ -5,14 +5,18 @@
   "main": "dist/index.js",
   "license": "MIT",
   "scripts": {
-    "build": "webpack"
+    "build": "webpack",
+    "peg": "pegjs --plugin ./node_modules/ts-pegjs/src/tspegjs -o src/sql-parser.ts --extra-options-file peg.config.json src/sql-parser.pegjs"
   },
   "devDependencies": {
     "@types/jest": "^20.0.7",
+    "@types/node": "~6.0.0",
     "awesome-typescript-loader": "^3.2.3",
     "clean-webpack-plugin": "^0.1.16",
     "jest": "^20.0.4",
+    "pegjs": "^0.10.0",
     "ts-jest": "^20.0.10",
+    "ts-pegjs": "^0.1.9",
     "typescript": "^2.4.2",
     "webpack": "^3.5.5"
   },

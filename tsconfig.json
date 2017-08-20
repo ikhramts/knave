@@ -6,15 +6,16 @@
         "inlineSources": false,
         "lib":[
             "es2015",
-            "es2016"
+            "es2016",
+            "es2015.promise"
         ],
         "module": "commonjs",
-        "noImplicitAny": true,
+        "noImplicitAny": false,
         "outDir": "dist",
         "preserveConstEnums": true,
         "removeComments": true,
         "sourceMap": true,
-        "strictNullChecks": true,
+        "strictNullChecks": false,
         "target": "es2016"
     },
     "include": [

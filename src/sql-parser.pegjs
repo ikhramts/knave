@@ -31,7 +31,7 @@ Identifier
     = !Keyword id:IdentifierName { return id; }
 
 IdentifierName
-    = firstChar:IdentifierFirstChar body:IdentifierBodyChar* { return firstChar + body;}
+    = firstChar:IdentifierFirstChar body:IdentifierBodyChar* { return firstChar + body.join('');}
 
 IdentifierFirstChar = [a-zA-Z_]
 

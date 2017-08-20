@@ -1,10 +1,14 @@
 {
     "compileOnSave": true,
     "compilerOptions": {
+        "declaration": false,
+        "inlineSourceMap": false,
+        "inlineSources": false,
         "lib":[
+            "es2015",
             "es2016"
         ],
-        "module": "es6",
+        "module": "commonjs",
         "noImplicitAny": true,
         "outDir": "dist",
         "preserveConstEnums": true,
@@ -13,7 +17,7 @@
         "strictNullChecks": true,
         "target": "es2016"
     },
-    "files": [
-        "src/index.ts"
+    "include": [
+        "src/**/*.ts"
     ]
 }

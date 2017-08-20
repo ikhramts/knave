@@ -6,8 +6,16 @@
   "license": "MIT",
   "scripts": {
     "build": "gulp",
-    "tsc": "tsc",
-    "peg": "pegjs --plugin ./node_modules/ts-pegjs/src/tspegjs -o src/sql-parser.ts --extra-options-file peg.config.json src/sql-parser.pegjs"
+    "peg": "pegjs --plugin ./node_modules/ts-pegjs/src/tspegjs -o src/sql-parser.ts --extra-options-file peg.config.json src/sql-parser.pegjs",
+    "test": "jest",
+    "tsc": "tsc"
+  },
+  "jest": {
+    "transform":  {
+      ".ts": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "src/.*\\.tests?\\.(ts|js)$",
+    "moduleFileExtensions": ["ts", "js"]
   },
   "devDependencies": {
     "@types/jest": "^20.0.7",

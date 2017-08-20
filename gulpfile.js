@@ -9,8 +9,10 @@ gulp.task("clean", () => {
         .pipe(clean());
 })
 
-gulp.task("default", ['clean'], () => {
-    return tsProject.src()
+gulp.task("build", ['clean'], () => {
+    return gulp.src(['src/**/*.ts', '!src/**/*.tests.ts'])
         .pipe(tsProject())
-        .js.pipe(gulp.dest('dist'));
+        .pipe(gulp.dest('dist'));
 });
+
+gulp.task("default", ["build"]);

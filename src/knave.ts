@@ -1,10 +1,11 @@
-import { Table } from './model'
-import { parse } from './sql-parser'
 import * as fs from 'fs';
 import * as path from 'path';
 
+import * as AST from './AST';
+import { parse } from './sql-parser';
+
 export namespace Knave {
-    export function buildFile(filePath: string) : Promise<Table> {
+    export function parseFile(filePath: string) : Promise<AST.Table> {
         return new Promise((resolve, reject) => {
             let fullFilePath = path.resolve(filePath);
             if(!fs.existsSync(fullFilePath)) {
@@ -15,7 +16,7 @@ export namespace Knave {
                 if (err)
                     reject (err);
 
-                let model = <Table>parse(data.toString(), {});
+                let model = <AST.Table>parse(data.toString(), {});
                 console.log(JSON.stringify(model));
                 resolve(model);
             });

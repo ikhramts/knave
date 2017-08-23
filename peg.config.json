@@ -1,5 +1,5 @@
 {
     "tspegjs": {
-        "customHeader": "import { Table } from './model'"
+        "customHeader": "import * as AST from '../AST'"
     }
 }

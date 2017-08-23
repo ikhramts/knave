@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`parseFile() Should parse ATS correctly 1`] = `
+FileDeclarations {
+  "declarations": Array [
+    Table {
+      "body": TableBody {
+        "lines": Array [
+          ColumnDefinition {
+            "constraints": ColumnConstraints {
+              "notNull": true,
+              "primaryKey": true,
+            },
+            "name": "id",
+            "type": "bigint",
+          },
+          ColumnDefinition {
+            "constraints": ColumnConstraints {
+              "notNull": true,
+            },
+            "name": "lineNumber",
+            "type": "smallint",
+          },
+        ],
+      },
+      "header": TableHeader {
+        "name": "Products",
+      },
+    },
+  ],
+}
+`;

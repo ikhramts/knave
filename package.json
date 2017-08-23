@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "build": "gulp",
-    "peg": "pegjs --plugin ./node_modules/ts-pegjs/src/tspegjs -o src/sql-parser.ts --extra-options-file peg.config.json src/sql-parser.pegjs",
+    "peg": "pegjs --plugin ./node_modules/ts-pegjs/src/tspegjs -o src/parsing/sql-parser.ts --extra-options-file peg.config.json src/parsing/sql-parser.pegjs",
     "test": "jest",
     "tsc": "tsc"
   },

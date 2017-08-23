@@ -9,7 +9,8 @@ describe("buildTable()", () => {
     beforeEach(() => {
         let astConstraints = new AST.ColumnConstraints({});
         let astTableHeader = new AST.TableHeader("tableName")
-        let astColumn = new AST.ColumnDefinition("colName", "colType", [astConstraints]);
+        let astColumnType = new AST.ColumnType("colType");
+        let astColumn = new AST.ColumnDefinition("colName", astColumnType, [astConstraints]);
         let astTableBody = new AST.TableBody([astColumn]);
         astTable = new AST.Table(astTableHeader, astTableBody);
     })
@@ -26,7 +27,8 @@ describe("buildTable()", () => {
 
     it("Should set number of columns", () => {
         let astConstraints = new AST.ColumnConstraints({});
-        let astColumn = new AST.ColumnDefinition("colName2", "colType", [astConstraints]);
+        let astColumnType = new AST.ColumnType("colType");
+        let astColumn = new AST.ColumnDefinition("colName2", astColumnType, [astConstraints]);
         astTable.body.lines.push(astColumn);
         let table = buildTable(astTable);
         expect(table.columns.length).toBe(2);
@@ -35,6 +37,13 @@ describe("buildTable()", () => {
     it("Should set column type", () => {
         let table = buildTable(astTable);
         expect(table.columns[0].columnType.name).toBe("colType");
+    })
+
+    it("Should set type arguments if they exist", () => {
+        (astTable.body.lines[0] as AST.ColumnDefinition).type.args = 
+            [literal(12), literal(22)];
+        let table = buildTable(astTable);
+        expect(table.columns[0].columnType.args).toEqual([12, 22]);
     })
 
     it("Should set model column not nullable if AST column is not nullable", () => {
@@ -56,7 +65,8 @@ describe("buildTable()", () => {
 
     it("Should add AST primary key columns to model primary key", () => {
         let astConstraints = new AST.ColumnConstraints({primaryKey: true});
-        let astColumn = new AST.ColumnDefinition("colName2", "colType", [astConstraints]);
+        let astColumnType = new AST.ColumnType("colType");
+        let astColumn = new AST.ColumnDefinition("colName2", astColumnType, [astConstraints]);
         astTable.body.lines.push(astColumn);
         let table = buildTable(astTable);
         expect(table.primaryKey.columns.length).toBe(1);
@@ -68,3 +78,8 @@ describe("buildTable()", () => {
         expect(table.primaryKey.columns.length).toBe(0);
     });
 });
+
+
+function literal(value: number) : AST.Literal {
+    return new AST.Literal({intLiteral: value});
+}

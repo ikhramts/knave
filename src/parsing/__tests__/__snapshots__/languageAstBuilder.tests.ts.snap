@@ -12,14 +12,47 @@ FileDeclarations {
               "primaryKey": true,
             },
             "name": "id",
-            "type": "bigint",
+            "type": ColumnType {
+              "args": Array [],
+              "name": "bigint",
+            },
           },
           ColumnDefinition {
             "constraints": ColumnConstraints {
               "notNull": true,
             },
             "name": "lineNumber",
-            "type": "smallint",
+            "type": ColumnType {
+              "args": Array [],
+              "name": "smallint",
+            },
+          },
+          ColumnDefinition {
+            "constraints": ColumnConstraints {},
+            "name": "productName",
+            "type": ColumnType {
+              "args": Array [
+                Literal {
+                  "intLiteral": 255,
+                },
+              ],
+              "name": "varchar",
+            },
+          },
+          ColumnDefinition {
+            "constraints": ColumnConstraints {},
+            "name": "price",
+            "type": ColumnType {
+              "args": Array [
+                Literal {
+                  "intLiteral": 18,
+                },
+                Literal {
+                  "intLiteral": 10,
+                },
+              ],
+              "name": "decimal",
+            },
           },
         ],
       },
@@ -43,7 +76,10 @@ FileDeclarations {
               "primaryKey": true,
             },
             "name": "id",
-            "type": "string",
+            "type": ColumnType {
+              "args": Array [],
+              "name": "string",
+            },
           },
         ],
       },
@@ -60,7 +96,10 @@ FileDeclarations {
               "primaryKey": true,
             },
             "name": "id2",
-            "type": "bigint",
+            "type": ColumnType {
+              "args": Array [],
+              "name": "bigint",
+            },
           },
         ],
       },

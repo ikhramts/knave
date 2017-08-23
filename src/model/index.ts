@@ -28,6 +28,7 @@ export class Column {
 
 export class ColumnType {
     name: string;
+    args: number[]
 
     constructor(init?: Partial<ColumnType>) {
         if (init) (<any>Object).assign(this, init);

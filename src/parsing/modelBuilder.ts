@@ -29,9 +29,11 @@ export function buildTable(astTable: AST.Table) : Table {
 
     for (let bodyLine of astTable.body.lines) {
         let columnDef = bodyLine as AST.ColumnDefinition;
+        let typeArgs = columnDef.type.args.map(arg => arg.intLiteral);
+
         let column = new Column({
             name: columnDef.name,
-            columnType: new ColumnType({ name: columnDef.type}),
+            columnType: new ColumnType({ name: columnDef.type.name, args: typeArgs}),
             isNotNull: !!columnDef.constraints.notNull,
         });
         

@@ -49,10 +49,10 @@ export type TableBodyLine = ColumnDefinition;
 
 export class ColumnDefinition {
     name: string;
-    type: string;
+    type: ColumnType;
     constraints: ColumnConstraints;
 
-    constructor(name: string, type: string, constraintList: ColumnConstraints[]) {
+    constructor(name: string, type: ColumnType, constraintList: ColumnConstraints[]) {
         this.name = name;
         this.type = type;
         
@@ -65,11 +65,30 @@ export class ColumnDefinition {
     }
 }
 
+export class ColumnType {
+    name: string;
+    args?: Literal[];
+
+    constructor(name: string, args?: Literal[]) {
+        this.name = name;
+        this.args = args ? args : [];
+    }
+}
+
 export class ColumnConstraints {
     primaryKey?: boolean;
     notNull?: boolean;
 
     constructor(init: Partial<ColumnConstraints>) {
         (<any>Object).assign(this, init);
+    }
+}
+
+export class Literal {
+    intLiteral: number;
+    stringLiteral: string;
+
+    constructor(init?: Partial<Literal>) {
+        if (init) (<any>Object).assign(this, init);
     }
 }

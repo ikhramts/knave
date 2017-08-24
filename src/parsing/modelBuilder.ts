@@ -1,4 +1,4 @@
-import * as AST from '../AST';
+import * as AST from './AST';
 import { Table, KnaveModel, Column, ColumnType, Index } from '../model'
 
 export function buildModel(fileDeclarations: AST.FileDeclarations[]) : KnaveModel {

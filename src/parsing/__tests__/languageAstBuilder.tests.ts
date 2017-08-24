@@ -1,5 +1,5 @@
 import { parseFile } from '../languageAstBuilder';
-import * as AST from '../../AST';
+import * as AST from '../AST';
 
 describe("parseFile()", () => {
     it("Should parse basic table correctly", () => {

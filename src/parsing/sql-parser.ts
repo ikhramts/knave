@@ -14,7 +14,7 @@
 
 "use strict";
 
-import * as AST from '../AST'
+import * as AST from './AST'
 export class SyntaxError extends Error {
   public static buildMessage(expected: string, found: string) {
     const DESCRIBE_EXPECTATION_FNS = {

@@ -1,5 +1,5 @@
 {
     "tspegjs": {
-        "customHeader": "import * as AST from '../AST'"
+        "customHeader": "import * as AST from './AST'"
     }
 }

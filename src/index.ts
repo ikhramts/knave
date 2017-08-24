@@ -1,1 +1,1 @@
-export { Knave } from './knave'
+export * from './knave'

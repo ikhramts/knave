@@ -4,11 +4,15 @@
   "description": "Database project manager",
   "main": "dist/index.js",
   "license": "MIT",
+  "bin": {
+    "knave": "./dist/cli/index.js"
+  },
   "scripts": {
     "build": "gulp",
     "peg": "pegjs --plugin ./node_modules/ts-pegjs/src/tspegjs -o src/parsing/sql-parser.ts --extra-options-file peg.config.json src/parsing/sql-parser.pegjs",
     "test": "jest",
-    "tsc": "tsc"
+    "tsc": "tsc",
+    "knave": "node ./dist/cli/index.js"
   },
   "jest": {
     "transform": {
@@ -22,16 +26,18 @@
   },
   "devDependencies": {
     "@types/jest": "^20.0.7",
+    "@types/mssql": "^4.0.6",
     "@types/node": "~6.0.0",
     "gulp": "^3.9.1",
     "gulp-clean": "^0.3.2",
     "gulp-typescript": "^3.2.1",
-    "mssql": "^4.0.4",
     "jest": "^20.0.4",
     "pegjs": "^0.10.0",
     "ts-jest": "^20.0.10",
     "ts-pegjs": "^0.1.9",
     "typescript": "^2.4.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "mssql": "^4.0.4"
+  }
 }

@@ -58,7 +58,7 @@ export class ColumnDefinition {
         
         let constraints = new ColumnConstraints({});
         for (let constraint of constraintList) {
-            (Object as any).assign(constraints, constraint);
+            Object.assign(constraints, constraint);
         }
 
         this.constraints = constraints;
@@ -80,7 +80,7 @@ export class ColumnConstraints {
     notNull?: boolean;
 
     constructor(init: Partial<ColumnConstraints>) {
-        (<any>Object).assign(this, init);
+        Object.assign(this, init);
     }
 }
 
@@ -89,6 +89,6 @@ export class Literal {
     stringLiteral: string;
 
     constructor(init?: Partial<Literal>) {
-        if (init) (<any>Object).assign(this, init);
+        if (init) Object.assign(this, init);
     }
 }

@@ -2,7 +2,7 @@ export class KnaveModel {
     tables: Table[] = [];
 
     constructor(init?: Partial<KnaveModel>) {
-        if (init) (<any>Object).assign(this, init);
+        if (init) Object.assign(this, init);
     }
 
     table(name: string) : Table | null {
@@ -20,7 +20,7 @@ export class Table {
     primaryKey: Index;
 
     constructor(init?: Partial<Table>) {
-        if (init) (<any>Object).assign(this, init);
+        if (init) Object.assign(this, init);
     }
 
     column(name: string) : Column{
@@ -38,7 +38,7 @@ export class Column {
     isNotNull?: boolean;
 
     constructor(init?: Partial<Column>) {
-        if (init) (<any>Object).assign(this, init);
+        if (init) Object.assign(this, init);
     }
 }
 
@@ -47,7 +47,7 @@ export class ColumnType {
     args: number[]
 
     constructor(init?: Partial<ColumnType>) {
-        if (init) (<any>Object).assign(this, init);
+        if (init) Object.assign(this, init);
     }
 }
 
@@ -56,6 +56,6 @@ export class Index {
     columns: Column[] = [];
 
     constructor(init?: Partial<Index>) {
-        if (init) (<any>Object).assign(this, init);
+        if (init) Object.assign(this, init);
     }
 }

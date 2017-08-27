@@ -16,5 +16,27 @@ export class MssqlColumnDef {
 };
 
 export function buildModel(dbColumns: MssqlColumnDef[]) : model.KnaveModel {
+    let tablesByName: {[id: string] : model.Table } = {};
+    
+    for (let dbColumn of dbColumns) {
+        let table = getOrAddTable(tablesByName, dbColumn.tableName);
+    }
+    
     return new model.KnaveModel();
+}
+
+function makeTable(name: string) {
+
+}
+
+function getOrAddTable(tablesByName: {[id: string] : model.Table }, name: string) {
+    var table = tablesByName[name];
+    
+    if (!table) {
+        table = new model.Table();
+        table.name = name;
+        table.primaryKey = new model.Index();
+    }
+
+    return table;
 }

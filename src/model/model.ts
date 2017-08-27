@@ -4,6 +4,14 @@ export class KnaveModel {
     constructor(init?: Partial<KnaveModel>) {
         if (init) (<any>Object).assign(this, init);
     }
+
+    table(name: string) : Table | null {
+        let found = this.tables.filter(t => t.name == name);
+        if (found.length > 0)
+            return found[0];
+
+        return null;
+    }
 }
 
 export class Table {
@@ -13,6 +21,14 @@ export class Table {
 
     constructor(init?: Partial<Table>) {
         if (init) (<any>Object).assign(this, init);
+    }
+
+    column(name: string) : Column{
+        let found = this.columns.filter(c => c.name == name);
+        if (found.length > 0)
+            return found[0];
+
+        return null;
     }
 }
 

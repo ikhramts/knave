@@ -33,6 +33,7 @@ export class MssqlAdapter implements DbAdapter {
                         let dbColumns = result.recordset.map(c => new MssqlColumnDef(c));
                         let model = buildModel(dbColumns);
 
+                        pool.close();
                         resolve(model);
                     },
                     err => {

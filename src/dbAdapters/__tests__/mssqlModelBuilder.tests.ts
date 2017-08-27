@@ -75,6 +75,23 @@ describe("mmsqlModelBuilder.buildModel()", () => {
         expect(getTestColumnType(model).name).toBe("type1");
     });
 
+    it("If column has primary key flag, add it to the primary key", () => {
+        dbColumn1.isPrimaryKey = true;
+        let model = buildModel(dbColumns);
+        let primaryKeyCols = model.table("table1").primaryKey.columns;
+
+        expect(primaryKeyCols.filter(c => c.name == "col1")).toHaveLength(1);
+    });
+
+    it("If column doesn't have primary key flag, do not add it to the primary key", () => {
+        dbColumn1.isPrimaryKey = false;
+        let model = buildModel(dbColumns);
+        let primaryKeyCols = model.table("table1").primaryKey.columns;
+
+        expect(primaryKeyCols.filter(c => c.name == "col1")).toHaveLength(0);
+    });
+            
+
     describe("Type arguments", () => {
         itAll("If type is numeric or decimal, should extract precision and scale", [
             "decimal",

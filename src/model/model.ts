@@ -35,7 +35,7 @@ export class Table {
 export class Column {
     name: string
     columnType: ColumnType;
-    isNotNull?: boolean;
+    isNotNull: boolean;
 
     constructor(init?: Partial<Column>) {
         if (init) Object.assign(this, init);

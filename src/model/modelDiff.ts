@@ -16,6 +16,7 @@ export class ModelDiff {
 }
 
 export class AlteredTable {
+    name: string;
     originalTable: Table;
 
     addedColumns: Column[];

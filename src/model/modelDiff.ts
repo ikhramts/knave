@@ -6,9 +6,9 @@ import {
 } from './model';
 
 export class ModelDiff {
-    addedTables: Table[];
-    removedTables: string[];
-    alteredTables: AlteredTable[];
+    addedTables: Table[] = [];
+    removedTables: string[] = [];
+    alteredTables: AlteredTable[] = [];
 
     constructor(init?: Partial<ModelDiff>) {
         if (init) Object.assign(this, init);
@@ -19,9 +19,9 @@ export class AlteredTable {
     name: string;
     originalTable: Table;
 
-    addedColumns: Column[];
-    removedColumns: string[];
-    alteredColumns: AlteredColumn[];
+    addedColumns: Column[] = [];
+    removedColumns: string[] = [];
+    alteredColumns: AlteredColumn[] = [];
 
     alteredPrimaryKey: AlteredPrimaryKey | null;
 
@@ -42,4 +42,8 @@ export class AlteredColumn extends Column {
 export class AlteredPrimaryKey {
     oldIndex: Index;
     newIndex: Index;
+
+    constructor(init?: Partial<AlteredPrimaryKey>) {
+        if (init) Object.assign(this, init);
+    }
 }

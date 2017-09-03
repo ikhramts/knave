@@ -1,0 +1,185 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mssqlRenderDiff() Alter table - add column 1`] = `
+"--------------- ALTER TABLE \\"table1\\" ---------------
+ALTER TABLE \\"table1\\" ADD \\"col1\\" type1 NULL;
+
+"
+`;
+
+exports[`mssqlRenderDiff() Alter table - add primary key 1`] = `
+"--------------- ALTER TABLE \\"table1\\" ---------------
+ALTER TABLE \\"table1\\" ADD CONSTRAINT \\"PK_table1\\" PRIMARY KEY CLUSTERED (
+        \\"col1\\" ASC
+    );
+
+"
+`;
+
+exports[`mssqlRenderDiff() Alter table - add primary key with custom name 1`] = `
+"--------------- ALTER TABLE \\"table1\\" ---------------
+ALTER TABLE \\"table1\\" ADD CONSTRAINT \\"CustomKeyName\\" PRIMARY KEY CLUSTERED (
+        \\"col1\\" ASC
+    );
+
+"
+`;
+
+exports[`mssqlRenderDiff() Alter table - add two columns 1`] = `
+"--------------- ALTER TABLE \\"table1\\" ---------------
+ALTER TABLE \\"table1\\" ADD \\"col1\\" type1 NULL;
+ALTER TABLE \\"table1\\" ADD \\"col2\\" type1 NULL;
+
+"
+`;
+
+exports[`mssqlRenderDiff() Alter table - alter column - change nullability 1`] = `
+"--------------- ALTER TABLE \\"table1\\" ---------------
+ALTER TABLE \\"table1\\" ALTER COLUMN \\"col1\\" NOT NULL
+"
+`;
+
+exports[`mssqlRenderDiff() Alter table - alter column - change type 1`] = `
+"--------------- ALTER TABLE \\"table1\\" ---------------
+ALTER TABLE \\"table1\\" ALTER COLUMN \\"col1\\" type2(3, 4)
+"
+`;
+
+exports[`mssqlRenderDiff() Alter table - alter column - change type and nullability 1`] = `
+"--------------- ALTER TABLE \\"table1\\" ---------------
+ALTER TABLE \\"table1\\" ALTER COLUMN \\"col1\\" type2 NOT NULL
+"
+`;
+
+exports[`mssqlRenderDiff() Alter table - change primary key 1`] = `
+"--------------- ALTER TABLE \\"table1\\" ---------------
+ALTER TABLE \\"table1\\" DROP CONSTRAINT \\"PK_table1\\";
+ALTER TABLE \\"table1\\" ADD CONSTRAINT \\"PK_table1\\" PRIMARY KEY CLUSTERED (
+        \\"col2\\" ASC
+    );
+
+"
+`;
+
+exports[`mssqlRenderDiff() Alter table - drop column 1`] = `
+"--------------- ALTER TABLE \\"table1\\" ---------------
+ALTER TABLE \\"table1\\" DROP \\"col1\\";
+
+"
+`;
+
+exports[`mssqlRenderDiff() Alter table - drop two columns 1`] = `
+"--------------- ALTER TABLE \\"table1\\" ---------------
+ALTER TABLE \\"table1\\" DROP \\"col1\\";
+ALTER TABLE \\"table1\\" DROP \\"col2\\";
+
+"
+`;
+
+exports[`mssqlRenderDiff() Alter table - remove primary key 1`] = `
+"--------------- ALTER TABLE \\"table1\\" ---------------
+ALTER TABLE \\"table1\\" DROP CONSTRAINT \\"PK_table1\\";
+
+"
+`;
+
+exports[`mssqlRenderDiff() Create table with a primary key 1`] = `
+"CREATE TABLE \\"table1\\" (
+    \\"col1\\" type1 NULL,
+    CONSTRAINT \\"PK_table1\\" PRIMARY KEY CLUSTERED (
+        \\"col1\\" ASC
+    )
+);
+
+"
+`;
+
+exports[`mssqlRenderDiff() Create table with a primary key that references two columns 1`] = `
+"CREATE TABLE \\"table1\\" (
+    \\"col1\\" type1 NULL,
+    \\"col2\\" type2 NULL,
+    CONSTRAINT \\"PK_table1\\" PRIMARY KEY CLUSTERED (
+        \\"col1\\" ASC,
+        \\"col2\\" ASC
+    )
+);
+
+"
+`;
+
+exports[`mssqlRenderDiff() Create table with column that has type arguments 1`] = `
+"CREATE TABLE \\"table1\\" (
+    \\"col1\\" type1(2, 3) NULL
+);
+
+"
+`;
+
+exports[`mssqlRenderDiff() Create table with null and not null columns 1`] = `
+"CREATE TABLE \\"table1\\" (
+    \\"col1\\" type1 NULL,
+    \\"col2\\" type2 NOT NULL
+);
+
+"
+`;
+
+exports[`mssqlRenderDiff() Create table with primary key that has a name 1`] = `
+"CREATE TABLE \\"table1\\" (
+    \\"col1\\" type1 NULL,
+    CONSTRAINT \\"PK_someName\\" PRIMARY KEY CLUSTERED (
+        \\"col1\\" ASC
+    )
+);
+
+"
+`;
+
+exports[`mssqlRenderDiff() Create table with two columns 1`] = `
+"CREATE TABLE \\"table1\\" (
+    \\"col1\\" type1 NULL,
+    \\"col2\\" type2 NULL
+);
+
+"
+`;
+
+exports[`mssqlRenderDiff() Create table without primary key 1`] = `
+"CREATE TABLE \\"table1\\" (
+    \\"col1\\" type1 NULL
+);
+
+"
+`;
+
+exports[`mssqlRenderDiff() Create two tables 1`] = `
+"CREATE TABLE \\"table1\\" (
+    \\"col1\\" type1 NULL
+);
+
+CREATE TABLE \\"table2\\" (
+    \\"col1\\" type1 NULL
+);
+
+"
+`;
+
+exports[`mssqlRenderDiff() Drop table 1`] = `
+"DROP TABLE \\"table1\\";
+"
+`;
+
+exports[`mssqlRenderDiff() Drop table and create table 1`] = `
+"CREATE TABLE \\"table1\\" (
+    \\"col1\\" type1 NULL
+);
+
+DROP TABLE \\"table2\\";
+"
+`;
+
+exports[`mssqlRenderDiff() Drop two tables 1`] = `
+"DROP TABLE \\"table1\\";
+DROP TABLE \\"table2\\";
+"
+`;

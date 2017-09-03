@@ -4,6 +4,7 @@ import {
 import {
     ModelDiff, AlteredTable, AlteredColumn, AlteredPrimaryKey
 } from './modelDiff';
+import { areArraysEqual } from '../utils';
 
 export function calcModelDiff(newModel: KnaveModel, oldModel: KnaveModel) : ModelDiff {
     // Do the diff on tables.
@@ -163,21 +164,6 @@ function containsSame<T>(first: T[], second: T[], compareOn: (it:T) => string) :
     
     for (var i = 0; i < length; i++) {
         if (firstComparator[i] != secondComparator[i])
-            return false;
-    }
-
-    return true;
-}
-
-function areArraysEqual<T>(first: T[], second: T[]) {
-    if ((!first) && (!second)) return true;
-    if ((!first) || (!second)) return false;
-    if (first.length != second.length) return false;
-
-    let length = first.length;
-
-    for (let i = 0; i++; i < length) {
-        if (first[i] != second[i])
             return false;
     }
 

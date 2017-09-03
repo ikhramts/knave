@@ -1,3 +1,5 @@
+import { areArraysEqual } from '../utils';
+
 export class KnaveModel {
     tables: Table[] = [];
 
@@ -48,6 +50,16 @@ export class ColumnType {
 
     constructor(init?: Partial<ColumnType>) {
         if (init) Object.assign(this, init);
+
+        if (init.args) this.args = init.args.slice();
+    }
+
+    isEqualTo(other: ColumnType) : boolean {
+        if (!other) return false;
+        if (this.name != other.name) return false;
+        if (!areArraysEqual(this.args, other.args)) return false;
+
+        return true;
     }
 }
 

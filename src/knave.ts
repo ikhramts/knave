@@ -17,8 +17,9 @@ export namespace Knave {
             throw "No default databse is set in .knaverc";
 
         let dbAdapter = new MssqlAdapter(dbConfig);
-        dbAdapter.queryModel(dbConfig)
-            .then(model => console.log(model));
+        dbAdapter.queryModel(dbConfig).then(model => {
+            console.log(model)
+        });
 
     }
 }

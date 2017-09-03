@@ -23,7 +23,7 @@ export class AlteredTable {
     removedColumns: string[];
     alteredColumns: AlteredColumn[];
 
-    alteredPrimaryKey: Index | null;
+    alteredPrimaryKey: AlteredPrimaryKey | null;
 
     constructor(init?: Partial<AlteredTable>) {
         if (init) Object.assign(this, init);
@@ -37,4 +37,9 @@ export class AlteredColumn extends Column {
         super({});
         if (init) Object.assign(this, init);
     }
+}
+
+export class AlteredPrimaryKey {
+    oldIndex: Index;
+    newIndex: Index;
 }

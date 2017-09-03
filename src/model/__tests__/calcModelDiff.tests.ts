@@ -2,11 +2,11 @@ import {
     KnaveModel, Table, Column, ColumnType, Index,
 } from '../model';
 import {
-    ModelDiff, AlteredTable, AlteredColumn,
+    ModelDiff, AlteredTable, AlteredColumn, AlteredPrimaryKey
 } from '../modelDiff';
 
 import { 
-    calcModelDiff, calcTableDiff, calcColumnDiff, calcIndexDiff 
+    calcModelDiff, calcTableDiff, calcColumnDiff, calcPrimaryKeyDiff 
 } from '../calcModelDiff';
 
 describe("calcModelDiff()", () => {
@@ -95,7 +95,7 @@ describe("calcTableDiff()", () => {
 
     it("If a column is different in newTable and oldTable, should add it to alteredColumns", () => {
         newTable.columns.push(getTestColumn("col2", "type1"));
-        newTable.columns.push(getTestColumn("col2", "type2"));
+        oldTable.columns.push(getTestColumn("col2", "type2"));
         
         let alteredTable = calcTableDiff(newTable, oldTable);
         expect(alteredTable.addedColumns.filter(c => c.name == "col2")).toHaveLength(0);
@@ -106,12 +106,15 @@ describe("calcTableDiff()", () => {
 
     it("If primary key is different in newTable and oldTable, should add new key to AlteredTable", () => {
         oldTable.columns.push(getTestColumn("col2"));
+        oldTable.primaryKey = new Index();
         oldTable.primaryKey.columns.push(oldTable.columns[1]);
+
+        newTable.primaryKey = new Index();
         newTable.primaryKey.columns.push(newTable.columns[0]);
 
         let alteredTable = calcTableDiff(newTable, oldTable);
-        let alteredKeyColumns = alteredTable.alteredPrimaryKey.columns;
-        expect(alteredKeyColumns.filter(c => c.name == "col2")).toHaveLength(1);
+        let alteredKeyColumns = alteredTable.alteredPrimaryKey.newIndex.columns;
+        expect(alteredKeyColumns.filter(c => c.name == "col1")).toHaveLength(1);
     });
 
     it("If primary key is same in newTable and oldTable, should not set alteredPrimaryKey", () => {
@@ -163,7 +166,7 @@ describe("calcColumnDiff()", ()=> {
     it("If newColumn and oldColumn are different, should set AlteredColumn properties to new column", () => {
         newColumn.columnType.name = "different_type";
         let alteredColumn = calcColumnDiff(newColumn, oldColumn);
-        expect(alteredColumn).toContain(newColumn);
+        expect(alteredColumn).toMatchObject(newColumn);
     });
 
     it("Columns are different if columnType name is different", () => {
@@ -190,7 +193,7 @@ describe("calcColumnDiff()", ()=> {
     });
 });
 
-describe("calcIndexDiff()", () => {
+describe("calcPrimaryKeyDiff()", () => {
     let newIndex : Index;
     let oldIndex: Index;
     let column1: Column;
@@ -207,32 +210,44 @@ describe("calcIndexDiff()", () => {
         column2 = getTestColumn("col2");
     });
 
-    it("If newIndex has a column that oldIndex doesn't have, return newIndex", () => {
+    it("If newIndex is different from oldIndex, should set newIndex", () => {
         newIndex.columns.push(column2);
-        let alteredIndex = calcIndexDiff(newIndex, oldIndex);
-        expect(alteredIndex).toBe(newIndex);
+        let alteredIndex = calcPrimaryKeyDiff(newIndex, oldIndex);
+        expect(alteredIndex.newIndex).toBe(newIndex);
     });
 
-    it("If newIndex doesn't have column that oldIndex has, return newIndex", () => {
+    it("If newIndex is different from oldIndex, should set oldIndex", () => {
+        newIndex.columns.push(column2);
+        let alteredIndex = calcPrimaryKeyDiff(newIndex, oldIndex);
+        expect(alteredIndex.oldIndex).toBe(oldIndex);
+    });
+
+    it("If newIndex has a column that oldIndex doesn't have, should return diff", () => {
+        newIndex.columns.push(column2);
+        let alteredIndex = calcPrimaryKeyDiff(newIndex, oldIndex);
+        expect(alteredIndex.newIndex).toBe(newIndex);
+    });
+
+    it("If newIndex doesn't have column that oldIndex has, should return diff", () => {
         oldIndex.columns.push(column2);
-        let alteredIndex = calcIndexDiff(newIndex, oldIndex);
-        expect(alteredIndex).toBe(newIndex);
+        let alteredIndex = calcPrimaryKeyDiff(newIndex, oldIndex);
+        expect(alteredIndex.newIndex).toBe(newIndex);
     });
 
-    it("If newIndex name is not null and different from oldIndex name, return newIndex", () => {
+    it("If newIndex name is not null and different from oldIndex name, should return diff", () => {
         newIndex.name = "different_name";
-        let alteredIndex = calcIndexDiff(newIndex, oldIndex);
-        expect(alteredIndex).toBe(newIndex);
+        let alteredIndex = calcPrimaryKeyDiff(newIndex, oldIndex);
+        expect(alteredIndex.newIndex).toBe(newIndex);
     });
 
     it("If newIndex name is null and there are no other differences, return null", () => {
         newIndex.name = null;
-        let alteredIndex = calcIndexDiff(newIndex, oldIndex);
+        let alteredIndex = calcPrimaryKeyDiff(newIndex, oldIndex);
         expect(alteredIndex).toBeNull();
     });
 
     it("If newIndex and oldIndex are equivalent, return null", () => {
-        let alteredIndex = calcIndexDiff(newIndex, oldIndex);
+        let alteredIndex = calcPrimaryKeyDiff(newIndex, oldIndex);
         expect(alteredIndex).toBeNull();
     });
 });

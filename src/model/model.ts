@@ -44,7 +44,7 @@ export class Column {
 
 export class ColumnType {
     name: string;
-    args: number[]
+    args: number[] = []
 
     constructor(init?: Partial<ColumnType>) {
         if (init) Object.assign(this, init);

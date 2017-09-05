@@ -1,6 +1,6 @@
 import * as AST from '../AST';
 import { Table, KnaveModel, Column, ColumnType, Index } from '../../model';
-import { buildTable } from '../modelBuilder';
+import { buildTable } from '../buildModel';
 
 
 describe("buildTable()", () => {

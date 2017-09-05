@@ -25,6 +25,7 @@
     ]
   },
   "devDependencies": {
+    "@types/glob": "^5.0.32",
     "@types/jest": "^20.0.7",
     "@types/mssql": "^4.0.6",
     "@types/node": "~6.0.0",
@@ -38,6 +39,7 @@
     "typescript": "^2.4.2"
   },
   "dependencies": {
+    "glob": "^7.1.2",
     "mssql": "^4.0.4"
   }
 }

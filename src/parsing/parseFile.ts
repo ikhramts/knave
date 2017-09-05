@@ -4,12 +4,6 @@ import * as path from 'path';
 import * as AST from './AST';
 import { parse } from './sql-parser';
 
-export function parseProject(rootDir: string) : Promise<AST.FileDeclarations[]> {
-    return new Promise<AST.FileDeclarations[]>((resolve, reject) => {
-        
-    });
-}
-
 export function parseFile(filePath: string) : Promise<AST.FileDeclarations> {
     return new Promise((resolve, reject) => {
         let fullFilePath = path.resolve(filePath);
